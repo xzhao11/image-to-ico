@@ -1,2 +1,1 @@
-# pngToIco
- 
+A simple tool to convert images to ico format to be compatible with windows 10 icons

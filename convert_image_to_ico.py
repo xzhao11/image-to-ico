@@ -3,10 +3,10 @@ import PythonMagick
 import sys
 
 
-def convert_single_png(filename, src_pathname, des_pathname):
+def convert_single_img(filename, src_pathname, des_pathname):
     if not filename.lower().endswith(('.png', '.jpg', '.jpeg')):
         filename = input("Please input a valid image name with extension: ")
-        convert_single_png(filename)
+        convert_single_img(filename)
     src_image = os.path.join(src_pathname, filename)
     img = PythonMagick.Image(src_image)
     img.sample('256x256')
@@ -16,10 +16,10 @@ def convert_single_png(filename, src_pathname, des_pathname):
     print("%s --> %s" % (filename, ico_name))
 
 
-def convert_dir_png(src, des):
+def convert_dir_imgs(src, des):
     for file in os.listdir(src):
         if file.lower().endswith(('.png', '.jpg', '.jpeg')):
-            convert_single_png(file, src, des)
+            convert_single_img(file, src, des)
 
 
 def check_args():
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     check_args()
     filename = sys.argv[1]
     if os.path.isfile(filename):
-        convert_single_png(filename, "", "")
+        convert_single_img(filename, "", "")
     elif os.path.isdir(filename):
         des_dir = filename + '-icos'
         if not os.path.exists(filename+'-icos'):
@@ -53,7 +53,7 @@ if __name__ == '__main__':
                             while dir == des_dir:
                                 des_dir = input("Dest folder exits, please input a different name: ")
                     os.mkdir(des_dir)
-        convert_dir_png(filename, des_dir)
+        convert_dir_imgs(filename, des_dir)
     else:
         print("usage: convert_image_to_ico.py filename/dirname")
         exit(0)
